@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/JunNishimura/clean-architecture-with-go/driver"
+)
 
 func main() {
-	fmt.Println("hello, world")
+	if err := driver.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
