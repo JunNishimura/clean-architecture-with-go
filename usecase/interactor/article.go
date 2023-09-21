@@ -12,8 +12,9 @@ type Article struct {
 	repository repository.Article
 }
 
-func NewArticle(repository repository.Article) port.ArticleInput {
+func NewArticle(outputPort port.ArticleOutput, repository repository.Article) port.ArticleInput {
 	return &Article{
+		outputPort: outputPort,
 		repository: repository,
 	}
 }
