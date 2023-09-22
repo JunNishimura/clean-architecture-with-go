@@ -2,8 +2,6 @@ package port
 
 import (
 	"context"
-
-	"github.com/JunNishimura/clean-architecture-with-go/entities"
 )
 
 type ArticleInput interface {
@@ -11,6 +9,5 @@ type ArticleInput interface {
 }
 
 type ArticleOutput interface {
-	Render([]*entities.Article)
-	RenderError(error)
+	Render(ctx context.Context, body any, status int)
 }

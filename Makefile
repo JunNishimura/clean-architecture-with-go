@@ -1,7 +1,10 @@
-.PHONY: up down
+.PHONY: up down build
 
 up:
-	docker compose up -d
+	docker compose up --build -d
 
 down:
 	docker compose down
+
+build: 
+	docker compose build
