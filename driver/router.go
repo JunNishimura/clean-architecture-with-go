@@ -20,7 +20,7 @@ func Run() error {
 
 	articleController := controller.NewArticle(db)
 	r.Get("/articles", articleController.GetArticles)
-	if err := http.ListenAndServe(":8080", r); err != nil {
+	if err := http.ListenAndServe(":80", r); err != nil {
 		return fmt.Errorf("fail to listen and serve: %v", err)
 	}
 	return nil
