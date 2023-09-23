@@ -23,5 +23,5 @@ func (a *article) GetArticles(w http.ResponseWriter, r *http.Request) {
 	outputPort := presenter.NewArticle(w)
 	repository := gateway.NewArticleRepository(a.db)
 	inputPort := interactor.NewArticle(outputPort, repository)
-	inputPort.GetArticles(r.Context())
+	inputPort.FindAll(r.Context())
 }

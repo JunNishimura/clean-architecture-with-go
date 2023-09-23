@@ -7,5 +7,5 @@ import (
 )
 
 type Article interface {
-	GetArticles(context.Context) ([]*entities.Article, error)
+	FindAll(context.Context) ([]*entities.Article, error)
 }

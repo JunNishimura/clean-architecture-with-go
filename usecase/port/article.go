@@ -5,7 +5,7 @@ import (
 )
 
 type ArticleInput interface {
-	GetArticles(context.Context)
+	FindAll(context.Context)
 }
 
 type ArticleOutput interface {

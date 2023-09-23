@@ -18,6 +18,6 @@ func NewArticleRepository(db *sql.DB) repository.Article {
 	}
 }
 
-func (r *ArticleRepository) GetArticles(ctx context.Context) ([]*entities.Article, error) {
+func (r *ArticleRepository) FindAll(ctx context.Context) ([]*entities.Article, error) {
 	return entities.Articles().All(ctx, r.db)
 }
