@@ -6,18 +6,23 @@ import (
 
 	"github.com/JunNishimura/clean-architecture-with-go/entities"
 	"github.com/JunNishimura/clean-architecture-with-go/usecase/repository"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
-type ArticleRepository struct {
+type articleRepository struct {
 	db *sql.DB
 }
 
 func NewArticleRepository(db *sql.DB) repository.Article {
-	return &ArticleRepository{
+	return &articleRepository{
 		db: db,
 	}
 }
 
-func (r *ArticleRepository) FindAll(ctx context.Context) ([]*entities.Article, error) {
+func (r *articleRepository) FindAll(ctx context.Context) ([]*entities.Article, error) {
 	return entities.Articles().All(ctx, r.db)
+}
+
+func (r *articleRepository) Create(ctx context.Context, newArticle *entities.Article) error {
+	return newArticle.Insert(ctx, r.db, boil.Infer())
 }

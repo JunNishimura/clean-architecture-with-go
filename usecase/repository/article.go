@@ -8,4 +8,5 @@ import (
 
 type Article interface {
 	FindAll(context.Context) ([]*entities.Article, error)
+	Create(context.Context, *entities.Article) error
 }

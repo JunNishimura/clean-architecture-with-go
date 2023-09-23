@@ -19,7 +19,12 @@ func Run() error {
 	}
 
 	articleController := controller.NewArticle(db)
-	r.Get("/articles", articleController.GetArticles)
+
+	r.Route("/articles", func(r chi.Router) {
+		r.Post("/", articleController.Create)
+		r.Get("/", articleController.FindAll)
+	})
+
 	if err := http.ListenAndServe(":80", r); err != nil {
 		return fmt.Errorf("fail to listen and serve: %v", err)
 	}
