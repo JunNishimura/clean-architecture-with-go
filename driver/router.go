@@ -25,6 +25,7 @@ func Run() error {
 		r.Get("/", articleController.FindAll)
 		r.Route("/{articleID}", func(r chi.Router) {
 			r.Get("/", articleController.FindByID)
+			r.Delete("/", articleController.Delete)
 		})
 	})
 
