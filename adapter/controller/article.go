@@ -40,7 +40,7 @@ func (a *article) FindByID(w http.ResponseWriter, r *http.Request) {
 	articleID, err := strconv.ParseInt(strArticleID, 10, 64)
 	if err != nil {
 		outputPort.Render(r.Context(), &presenter.ErrResponse{
-			Message: fmt.Sprintf("could not find article by '%s'", strArticleID),
+			Message: fmt.Sprintf("invalid article id '%s'", strArticleID),
 		}, http.StatusBadRequest)
 		return
 	}
@@ -79,7 +79,7 @@ func (a *article) Delete(w http.ResponseWriter, r *http.Request) {
 	articleID, err := strconv.ParseInt(strArticleID, 10, 64)
 	if err != nil {
 		outputPort.Render(r.Context(), &presenter.ErrResponse{
-			Message: fmt.Sprintf("could not find article by '%s'", strArticleID),
+			Message: fmt.Sprintf("invalid article id '%s'", strArticleID),
 		}, http.StatusBadRequest)
 		return
 	}
