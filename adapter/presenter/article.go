@@ -22,7 +22,7 @@ func NewArticle(w http.ResponseWriter) port.ArticleOutput {
 
 type ErrResponse struct {
 	Message string   `json:"message"`
-	Details []string `json:"details,omitempty`
+	Details []string `json:"details,omitempty"`
 }
 
 func (a *article) Render(ctx context.Context, body any, status int) {

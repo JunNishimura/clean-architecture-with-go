@@ -26,7 +26,7 @@ func NewArticle(outputPort port.ArticleOutput, repository repository.Article) po
 
 type ErrResponse struct {
 	Message string   `json:"message"`
-	Details []string `json:"details,omitempty`
+	Details []string `json:"details,omitempty"`
 }
 
 func (a *Article) FindAll(ctx context.Context) {
