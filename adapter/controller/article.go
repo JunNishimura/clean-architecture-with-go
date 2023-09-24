@@ -41,7 +41,8 @@ func (a *article) FindByID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		outputPort.Render(r.Context(), &presenter.ErrResponse{
 			Message: fmt.Sprintf("could not find article by '%s'", strArticleID),
-		}, http.StatusNotFound)
+		}, http.StatusBadRequest)
+		return
 	}
 	inputPort.FindByID(r.Context(), articleID)
 }
@@ -59,6 +60,7 @@ func (a *article) Create(w http.ResponseWriter, r *http.Request) {
 		outputPort.Render(r.Context(), &presenter.ErrResponse{
 			Message: err.Error(),
 		}, http.StatusInternalServerError)
+		return
 	}
 
 	newArticle := &entities.Article{
