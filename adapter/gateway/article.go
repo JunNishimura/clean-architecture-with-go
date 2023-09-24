@@ -31,6 +31,23 @@ func (r *articleRepository) Create(ctx context.Context, newArticle *entities.Art
 	return newArticle.Insert(ctx, r.db, boil.Infer())
 }
 
+func (r *articleRepository) Update(ctx context.Context, articleID int64, title, body *string) error {
+	article, err := entities.FindArticle(ctx, r.db, articleID)
+	if err != nil {
+		return err
+	}
+	if title != nil {
+		article.Title = *title
+	}
+	if body != nil {
+		article.Body = *body
+	}
+	if _, err := article.Update(ctx, r.db, boil.Infer()); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *articleRepository) Delete(ctx context.Context, articleID int64) error {
 	article, err := entities.FindArticle(ctx, r.db, articleID)
 	if err != nil {
