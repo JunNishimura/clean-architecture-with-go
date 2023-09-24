@@ -41,7 +41,8 @@ func (a *article) FindByID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		outputPort.Render(r.Context(), &presenter.ErrResponse{
 			Message: fmt.Sprintf("could not find article by '%s'", strArticleID),
-		}, http.StatusNotFound)
+		}, http.StatusBadRequest)
+		return
 	}
 	inputPort.FindByID(r.Context(), articleID)
 }
@@ -59,6 +60,7 @@ func (a *article) Create(w http.ResponseWriter, r *http.Request) {
 		outputPort.Render(r.Context(), &presenter.ErrResponse{
 			Message: err.Error(),
 		}, http.StatusInternalServerError)
+		return
 	}
 
 	newArticle := &entities.Article{
@@ -66,4 +68,20 @@ func (a *article) Create(w http.ResponseWriter, r *http.Request) {
 		Body:  b.Body,
 	}
 	inputPort.Create(r.Context(), newArticle)
+}
+
+func (a *article) Delete(w http.ResponseWriter, r *http.Request) {
+	outputPort := presenter.NewArticle(w)
+	repository := gateway.NewArticleRepository(a.db)
+	inputPort := interactor.NewArticle(outputPort, repository)
+
+	strArticleID := chi.URLParam(r, "articleID")
+	articleID, err := strconv.ParseInt(strArticleID, 10, 64)
+	if err != nil {
+		outputPort.Render(r.Context(), &presenter.ErrResponse{
+			Message: fmt.Sprintf("could not find article by '%s'", strArticleID),
+		}, http.StatusBadRequest)
+		return
+	}
+	inputPort.Delete(r.Context(), articleID)
 }

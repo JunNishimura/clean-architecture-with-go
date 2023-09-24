@@ -30,3 +30,14 @@ func (r *articleRepository) FindByID(ctx context.Context, articleID int64) (*ent
 func (r *articleRepository) Create(ctx context.Context, newArticle *entities.Article) error {
 	return newArticle.Insert(ctx, r.db, boil.Infer())
 }
+
+func (r *articleRepository) Delete(ctx context.Context, articleID int64) error {
+	article, err := entities.FindArticle(ctx, r.db, articleID)
+	if err != nil {
+		return err
+	}
+	if _, err := article.Delete(ctx, r.db); err != nil {
+		return err
+	}
+	return nil
+}

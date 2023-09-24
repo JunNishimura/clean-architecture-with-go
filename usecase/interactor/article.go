@@ -69,3 +69,13 @@ func (a *Article) Create(ctx context.Context, newArticle *entities.Article) {
 	}{ID: newArticle.ID}
 	a.outputPort.Render(ctx, rsp, http.StatusOK)
 }
+
+func (a *Article) Delete(ctx context.Context, articleID int64) {
+	if err := a.repository.Delete(ctx, articleID); err != nil {
+		a.outputPort.Render(ctx, &ErrResponse{
+			Message: err.Error(),
+		}, http.StatusInternalServerError)
+		return
+	}
+	a.outputPort.Render(ctx, struct{}{}, http.StatusOK)
+}

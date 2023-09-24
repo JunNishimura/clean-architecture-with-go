@@ -10,6 +10,7 @@ type ArticleInput interface {
 	FindAll(context.Context)
 	FindByID(context.Context, int64)
 	Create(context.Context, *entities.Article)
+	Delete(context.Context, int64)
 }
 
 type ArticleOutput interface {
