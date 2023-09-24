@@ -23,6 +23,10 @@ func (r *articleRepository) FindAll(ctx context.Context) ([]*entities.Article, e
 	return entities.Articles().All(ctx, r.db)
 }
 
+func (r *articleRepository) FindByID(ctx context.Context, articleID int64) (*entities.Article, error) {
+	return entities.FindArticle(ctx, r.db, articleID)
+}
+
 func (r *articleRepository) Create(ctx context.Context, newArticle *entities.Article) error {
 	return newArticle.Insert(ctx, r.db, boil.Infer())
 }

@@ -23,6 +23,9 @@ func Run() error {
 	r.Route("/articles", func(r chi.Router) {
 		r.Post("/", articleController.Create)
 		r.Get("/", articleController.FindAll)
+		r.Route("/{articleID}", func(r chi.Router) {
+			r.Get("/", articleController.FindByID)
+		})
 	})
 
 	if err := http.ListenAndServe(":80", r); err != nil {
