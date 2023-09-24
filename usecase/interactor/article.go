@@ -2,6 +2,9 @@ package interactor
 
 import (
 	"context"
+	"database/sql"
+	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/JunNishimura/clean-architecture-with-go/entities"
@@ -35,6 +38,23 @@ func (a *Article) FindAll(ctx context.Context) {
 		return
 	}
 	a.outputPort.Render(ctx, articles, http.StatusOK)
+}
+
+func (a *Article) FindByID(ctx context.Context, articleID int64) {
+	article, err := a.repository.FindByID(ctx, articleID)
+	if err != nil {
+		var status int
+		if errors.Is(err, sql.ErrNoRows) {
+			status = http.StatusNotFound
+		} else {
+			status = http.StatusInternalServerError
+		}
+		a.outputPort.Render(ctx, &ErrResponse{
+			Message: fmt.Sprintf("could not find article by '%d'", articleID),
+		}, status)
+		return
+	}
+	a.outputPort.Render(ctx, article, http.StatusOK)
 }
 
 func (a *Article) Create(ctx context.Context, newArticle *entities.Article) {
