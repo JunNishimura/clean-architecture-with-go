@@ -1,4 +1,4 @@
-.PHONY: up down build
+.PHONY: up down build gen
 
 up:
 	docker compose up --build -d
@@ -8,3 +8,6 @@ down:
 
 build: 
 	docker compose build
+
+gen:
+	sqlboiler mysql -c sqlboiler.toml -o entities -p entities --no-tests --wipe
