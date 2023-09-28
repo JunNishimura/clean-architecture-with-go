@@ -29,14 +29,14 @@ This is a simple CRUD application build on a Clean-Architecture written in Golan
 ```
 
 ## :book: Explanation
-
+![cleanarchitecture](https://github.com/JunNishimura/clean-architecture-with-go/assets/28744711/d72261cd-ee16-4d62-9cdd-3ccae600eb0f)
 
 | layer | directory |
 | ---- | ---- |
-| Enterprise Business Rules | entities |
-| Application Business Rules | usecase |
-| Interface Adapters | adapter |
-| Frameworks & Drivers | driver |
+| Enterprise Business Rules | [entities](https://github.com/JunNishimura/clean-architecture-with-go/tree/main/entities) |
+| Application Business Rules | [usecase](https://github.com/JunNishimura/clean-architecture-with-go/tree/main/usecase) |
+| Interface Adapters | [adapter](https://github.com/JunNishimura/clean-architecture-with-go/tree/main/adapter) |
+| Frameworks & Drivers | [driver](https://github.com/JunNishimura/clean-architecture-with-go/tree/main/driver) |
 
 ### Enterprise Business Rules
 Core business rules are implemented in this layer.
