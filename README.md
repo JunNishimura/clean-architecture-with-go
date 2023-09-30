@@ -4,6 +4,7 @@ This is a simple CRUD application build on a Clean-Architecture written in Golan
 ## :triangular_flag_on_post: DEMO
 ### 1. use Docker to set up an environment to run the application
 ```bash
+> make init
 > make up 
 ```
 ### 2. Call API by curl command
